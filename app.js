@@ -22,7 +22,7 @@ const resolve = (key, words, cb) => request(url.format({
 
 const redirect = function (res, lat, long) {
 	res.statusCode = 301
-	res.setHeader('Location', url.format({
+	res.setHeader('Locatio', url.format({
 		protocol: 'https',
 		host:     'google.com',
 		pathname: '/maps',
@@ -32,20 +32,28 @@ const redirect = function (res, lat, long) {
 	}))
 }
 
+const error = function (res, status, code, message) {
+	res.statusCode = status
+	res.end(JSON.stringify({
+		error: code,
+		message
+	}))
+}
+
+
+
 const app = http.createServer(function (req, res) {
 	let match = triple.exec(req.url)
 	if (match && match.length === 4) {
 		resolve(key, match, function (err, _, body) {
-			if (err) { res.statusCode = 500; return res.end(err.message) }
+			if (err) return error(res, 500, 2, err.message)
 			try { body = JSON.parse(body) }
-			catch (err) { res.statusCode = 500; return res.end(err.message) }
-			if (body.error) { res.statusCode = 500; return res.end(body.message) }
+			catch (err) { return error(res, 500, 3, err.message) }
+			if (body.error) { return error(res, 500, 4, body.message) }
+
 			redirect(res, body.position[0], body.position[1])
-			res.end('done')
+			res.end(JSON.stringify({error: false}))
 		})
-	} else {
-		res.statusCode = 400
-		res.end('invalid word triple')
-	}
+	} else error(res, 400, 1, 'invalid word triple')
 })
 app.listen(8080)
