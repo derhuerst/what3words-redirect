@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 'use strict'
 
+const config =      require('config')
 const http =        require('http')
 const url =         require('url')
 const cors =        require('cors')
@@ -8,7 +9,7 @@ const request =     require('request')
 
 
 
-const key = '5D05GMV7'
+const key = config.key
 const triple = /^\/(\w+)\.(\w+)\.(\w+)$/
 
 const sendCors = cors()
