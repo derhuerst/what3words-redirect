@@ -3,7 +3,8 @@
 	"description":       "Redirects what3words triples to Google Maps.",
 	"version":           "0.1.0",
 	"main":              "app.js",
-	"files":             ["app.js"],
+	"bin":               "bin.js",
+	"files":             ["app.js", "bin.js"],
 	"keywords":          ["what3words", "coords", "maps", "web", "service", "api"],
 	"author":            "Jannis R <mail@jannisr.de>",
 	"homepage":          "https://github.com/derhuerst/what3words-redirect",
@@ -11,6 +12,11 @@
 	"license":           "ISC",
 	"dependencies": {
 		"cors":          "^2.7.1",
-		"request":       "^2.69"
+		"request":       "^2.69",
+		"forever":       "^0.15.1"
+	},
+	"scripts": {
+		"start":         "forever start -s ./app.js",
+		"stop":          "forever stop ./app.js"
 	}
 }

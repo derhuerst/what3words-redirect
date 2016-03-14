@@ -5,7 +5,6 @@
 [![build status](https://img.shields.io/travis/derhuerst/what3words-redirect.svg)](https://travis-ci.org/derhuerst/what3words-redirect)
 [![dependency status](https://img.shields.io/david/derhuerst/what3words-redirect.svg)](https://david-dm.org/derhuerst/what3words-redirect#info=dependencies)
 [![dev dependency status](https://img.shields.io/david/dev/derhuerst/what3words-redirect.svg)](https://david-dm.org/derhuerst/what3words-redirect#info=devDependencies)
-```
 
 
 
