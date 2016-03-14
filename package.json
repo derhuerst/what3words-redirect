@@ -10,6 +10,7 @@
 	"repository":        "git://github.com/derhuerst/what3words-redirect.git",
 	"license":           "ISC",
 	"dependencies": {
-		"request":       "^2.69.0"
+		"cors":          "^2.7.1",
+		"request":       "^2.69"
 	}
 }

@@ -3,12 +3,15 @@
 
 const http =        require('http')
 const url =         require('url')
+const cors =        require('cors')
 const request =     require('request')
 
 
 
 const key = '5D05GMV7'
 const triple = /^\/(\w+)\.(\w+)\.(\w+)$/
+
+const sendCors = cors()
 
 const resolve = (key, words, cb) => request(url.format({
 	protocol:   'https',
@@ -43,6 +46,7 @@ const error = function (res, status, code, message) {
 
 
 const app = http.createServer(function (req, res) {
+	sendCors(req, res, () => {})
 	let match = triple.exec(req.url)
 	if (match && match.length === 4) {
 		resolve(key, match, function (err, _, body) {
