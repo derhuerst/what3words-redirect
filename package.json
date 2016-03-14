@@ -8,5 +8,8 @@
 	"author":            "Jannis R <mail@jannisr.de>",
 	"homepage":          "https://github.com/derhuerst/what3words-redirect",
 	"repository":        "git://github.com/derhuerst/what3words-redirect.git",
-	"license":           "ISC"
+	"license":           "ISC",
+	"dependencies": {
+		"request":       "^2.69.0"
+	}
 }
