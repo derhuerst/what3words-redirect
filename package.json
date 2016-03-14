@@ -1,0 +1,12 @@
+{
+	"name":              "what3words-redirect",
+	"description":       "Redirects what3words triples to Google Maps.",
+	"version":           "0.1.0",
+	"main":              "app.js",
+	"files":             ["app.js"],
+	"keywords":          ["what3words", "coords", "maps", "web", "service", "api"],
+	"author":            "Jannis R <mail@jannisr.de>",
+	"homepage":          "https://github.com/derhuerst/what3words-redirect",
+	"repository":        "git://github.com/derhuerst/what3words-redirect.git",
+	"license":           "ISC"
+}
