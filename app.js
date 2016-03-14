@@ -5,24 +5,13 @@ const config =      require('config')
 const http =        require('http')
 const url =         require('url')
 const cors =        require('cors')
-const request =     require('request')
+const w3w =         require('geo.what3words')(config.key)
 
 
 
-const key = config.key
 const triple = /^\/(\w+)\.(\w+)\.(\w+)$/
 
 const sendCors = cors()
-
-const resolve = (key, words, cb) => request(url.format({
-	protocol:   'https',
-	host:       'api.what3words.com',
-	pathname:   '/w3w',
-	query: {
-		key:    key,
-		string: words[1] + '.' + words[2] + '.' + words[3]
-	}
-}), cb)
 
 const redirect = function (res, lat, long) {
 	res.statusCode = 301
@@ -49,16 +38,16 @@ const error = function (res, status, code, message) {
 const app = http.createServer(function (req, res) {
 	sendCors(req, res, () => {})
 	let match = triple.exec(req.url)
-	if (match && match.length === 4) {
-		resolve(key, match, function (err, _, body) {
-			if (err) return error(res, 500, 2, err.message)
-			try { body = JSON.parse(body) }
-			catch (err) { return error(res, 500, 3, err.message) }
-			if (body.error) { return error(res, 500, 4, body.message) }
+	if (!match || match.length !== 4) return error(res, 400, 1, 'invalid word triple')
 
-			redirect(res, body.position[0], body.position[1])
-			res.end(JSON.stringify({error: false}))
-		})
-	} else error(res, 400, 1, 'invalid word triple')
+	w3w.wordsToPosition({
+		words: match.slice(1, 4)
+	})
+	.catch((err) => error(res, 500, 2, err.message))
+	.then(function (position) {
+		position = position.split(',')
+		redirect(res, position[0], position[1])
+		res.end(JSON.stringify({error: false}))
+	})
 })
 app.listen(8080)
