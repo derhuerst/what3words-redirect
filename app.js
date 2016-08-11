@@ -5,7 +5,9 @@ const config =      require('config')
 const http =        require('http')
 const url =         require('url')
 const cors =        require('cors')
-const w3w =         require('geo.what3words')(config.key)
+const Geocoder = require('geo.what3words')
+
+const w3w = new Geocoder({apiKey: config.key, language: config.language})
 
 
 
@@ -40,9 +42,7 @@ const app = http.createServer(function (req, res) {
 	let match = triple.exec(req.url)
 	if (!match || match.length !== 4) return error(res, 400, 1, 'invalid word triple')
 
-	w3w.wordsToPosition({
-		words: match.slice(1, 4)
-	})
+	w3w.forward({addr: match.slice(1, 4).join('.')})
 	.catch((err) => error(res, 500, 2, err.message))
 	.then(function (position) {
 		position = position.split(',')

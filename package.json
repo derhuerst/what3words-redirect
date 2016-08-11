@@ -12,7 +12,7 @@
 	"license":           "ISC",
 	"dependencies": {
 		"cors":           "^2.7.1",
-		"geo.what3words": "^0.2",
+		"geo.what3words": "^2",
 		"forever":        "^0.15.1"
 	},
 	"scripts": {
