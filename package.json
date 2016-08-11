@@ -11,6 +11,7 @@
 	"repository":        "git://github.com/derhuerst/what3words-redirect.git",
 	"license":           "ISC",
 	"dependencies": {
+		"config": "^1.21",
 		"cors":           "^2.7.1",
 		"geo.what3words": "^2",
 		"forever":        "^0.15.1"

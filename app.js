@@ -17,13 +17,11 @@ const sendCors = cors()
 
 const redirect = function (res, lat, long) {
 	res.statusCode = 301
-	res.setHeader('Locatio', url.format({
+	res.setHeader('Location', url.format({
 		protocol: 'https',
-		host:     'google.com',
+		host: 'google.com',
 		pathname: '/maps',
-		query: {
-			q:    lat + ',' + long
-		}
+		query: {q: lat + ',' + long}
 	}))
 }
 
