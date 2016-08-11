@@ -1,7 +1,7 @@
 {
 	"name":              "what3words-redirect",
 	"description":       "Redirects what3words triples to Google Maps.",
-	"version":           "0.1.0",
+	"version":           "0.1.1",
 	"main":              "app.js",
 	"bin":               "bin.js",
 	"files":             ["app.js", "bin.js"],
