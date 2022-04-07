@@ -14,7 +14,7 @@
 		"config": "^1.21",
 		"cors":           "^2.7.1",
 		"geo.what3words": "^2",
-		"forever":        "^0.15.1"
+		"forever":        "^4.0.3"
 	},
 	"scripts": {
 		"start":         "forever start -s ./app.js",
